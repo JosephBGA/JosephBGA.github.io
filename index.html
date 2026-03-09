@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Joseph Gomez | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --cream: #f5f0e8;
+      --gold: #b8973a;
+      --light-gray: #e8e3da;
+      --text-muted: #7a7165;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--navy);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(245, 240, 232, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    /* HERO BANNER */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hero-banner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      animation: slowZoom 12s ease forwards;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1.0); }
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,27,42,0.15) 0%,
+        rgba(13,27,42,0.1) 40%,
+        rgba(13,27,42,0.72) 80%,
+        rgba(13,27,42,0.88) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem 5rem;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 1s ease forwards 0.6s;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2.2rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.45);
+      padding-bottom: 3px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .hero-cta:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* STATS STRIP */
+    .stats {
+      background: var(--navy);
+      color: var(--cream);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-item {
+      padding: 3.5rem 3rem;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.45);
+      margin-bottom: 0.9rem;
+    }
+
+    .stat-desc {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(245,240,232,0.72);
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 6rem 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--navy);
+      margin-bottom: 3rem;
+    }
+
+    .experience-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--light-gray);
+    }
+
+    .exp-date {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding-top: 0.2rem;
+    }
+
+    .exp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-org {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-bullets li {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.75rem;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--light-gray);
+      padding: 1.8rem 2rem;
+    }
+
+    .skill-card-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-card-list {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+    }
+
+    /* CONTACT */
+    .contact-band {
+      background: var(--navy);
+      padding: 6rem 5rem;
+      text-align: center;
+    }
+
+    .contact-band .section-label { color: var(--gold); }
+
+    .contact-band .section-title {
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-band p {
+      font-size: 0.92rem;
+      color: rgba(245,240,232,0.65);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-block;
+      padding: 0.85rem 2.4rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--cream);
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+
+    .contact-link:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+
+    /* FOOTER */
+    footer {
+      padding: 1.8rem 3rem;
+      background: #060f18;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: rgba(245,240,232,0.3);
+      letter-spacing: 0.08em;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .stats { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .section { padding: 4rem 1.8rem; }
+      .experience-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-band { padding: 4rem 2rem; }
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">Joseph Gomez</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-banner">
+    <img src="IMG_0942.JPG" alt="Joseph Gomez, USMC Corporal" />
+    <div class="hero-text">
+      <p class="hero-eyebrow">United States Marine Corps · Corporal</p>
+      <h1 class="hero-name">Joseph Gomez</h1>
+      <p class="hero-sub">Finance · Leadership · Operations</p>
+      <div class="hero-divider"></div>
+      <a href="#experience" class="hero-cta">View My Experience ↓</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-value">4 yrs</div>
+      <div class="stat-label">Military Service</div>
+      <p class="stat-desc">USMC Financial Management Resource Analyst with a SECRET Security Clearance and global operations experience.</p>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">$40M+</div>
+      <div class="stat-label">Assets Managed</div>
+      <p class="stat-desc">Controlled risk across multiple lines to protect assets and property, meeting the expectations of senior leadership.</p>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">B.S.</div>
+      <div class="stat-label">Finance · Rutgers</div>
+      <p class="stat-desc">Currently pursuing a Bachelor of Science in Finance at Rutgers Business School, expected May 2027.</p>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">Professional Experience</h2>
+
+    <div class="experience-item">
+      <div class="exp-date">Sep 2023 – Present</div>
+      <div>
+        <div class="exp-title">Locker+ Associate, Customer Service</div>
+        <div class="exp-org">Amazon · Vauxhall, NJ</div>
+        <ul class="exp-bullets">
+          <li>Managed on-site customer service, package handling, and inventory — processing ~200 orders per shift.</li>
+          <li>Assisted with returns, troubleshot technical issues, and led site opening/closing procedures.</li>
+          <li>Maintained a clean, organized, and safe work environment at all times.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-date">Jan 2019 – Jun 2022</div>
+      <div>
+        <div class="exp-title">Financial Management Resource Analyst</div>
+        <div class="exp-org">United States Marine Corps · Okinawa, Japan</div>
+        <ul class="exp-bullets">
+          <li>Led teams of 3 in a fast-paced environment conducting domestic and global financial operations.</li>
+          <li>Controlled risk across multiple lines protecting assets valued at over $40,000,000.</li>
+          <li>Interpreted and analyzed financial data, providing weekly briefing recommendations to senior management.</li>
+          <li>Created a report-managing spreadsheet to log all travel budgeting, improving team efficiency.</li>
+          <li>Maintained funding documents for over $1,000,000 in assets.</li>
+          <li>Awarded National Defense Service Medal, Global War on Terrorism Service Medal, and Sea Service Deployment Ribbon (×3).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section" style="padding-top:0;" id="education">
+    <p class="section-label">Academic</p>
+    <h2 class="section-title">Education</h2>
+
+    <div class="experience-item">
+      <div class="exp-date">Expected May 2027</div>
+      <div>
+        <div class="exp-title">B.S. in Finance</div>
+        <div class="exp-org">Rutgers Business School · Newark, NJ</div>
+        <ul class="exp-bullets">
+          <li>Rutgers, The State University of New Jersey</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-date">Dec 2024</div>
+      <div>
+        <div class="exp-title">Associate in Arts, Business</div>
+        <div class="exp-org">Union County College · Cranford, NJ</div>
+        <ul class="exp-bullets">
+          <li>GPA: 3.18 / 4.0</li>
+          <li>Founded the Veterans Club at UCC; served as Treasurer and later Vice President.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" style="padding-top:0;" id="skills">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Finance &amp; Analysis</div>
+        <div class="skill-card-list">Data Entry · Data Analysis · Financial Reporting · Budgeting · Project Management</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Leadership &amp; Operations</div>
+        <div class="skill-card-list">Team Leadership · Training &amp; Development · Process Improvement · Attention to Detail</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Technology</div>
+        <div class="skill-card-list">Microsoft Office Suite (Word, Excel, PowerPoint, Teams) · Adobe Acrobat</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Communication</div>
+        <div class="skill-card-list">English (Native) · Spanish (Native) · Customer Service · Customer Support</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-band" id="contact">
+    <p class="section-label">Let's Connect</p>
+    <h2 class="section-title">Get in Touch</h2>
+    <p>(908) 525-8532</p>
+    <p>jbg169@scarletmail.rutgers.edu</p>
+    <div class="contact-links">
+      <a href="mailto:jbg169@scarletmail.rutgers.edu" class="contact-link">Send Email</a>
+      <a href="https://www.linkedin.com/in/joseph-gomez1" target="_blank" class="contact-link">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Joseph Gomez · All Rights Reserved</span>
+    <span>Semper Fidelis</span>
+  </footer>
+
+</body>
+</html>
